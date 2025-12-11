@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soft Chrono - Stopwatch & Timer</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 selection:bg-[var(--primary)] selection:text-white">
+
+    <div class="absolute top-6 right-6 flex gap-2 p-2 bg-white/50 backdrop-blur-sm rounded-full shadow-sm z-50">
+        <button onclick="setTheme('matcha')" class="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 transition-transform" style="background-color: #99D98C;" title="Matcha"></button>
+        <button onclick="setTheme('berry')" class="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 transition-transform" style="background-color: #FFB3C1;" title="Berry"></button>
+        <button onclick="setTheme('ocean')" class="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 transition-transform" style="background-color: #80CBC4;" title="Ocean"></button>
+        <button onclick="setTheme('sunset')" class="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 transition-transform" style="background-color: #FFB4A2;" title="Sunset"></button>
+        <button onclick="setTheme('lavender')" class="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 transition-transform" style="background-color: #D8B4FE;" title="Lavender"></button>
+    </div>
+
+    <div class="w-full max-w-md">
+        
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-extrabold tracking-tight text-[var(--text-main)] mb-1">Time<span style="color:var(--primary)">Keep</span></h1>
+            <p class="text-sm text-[var(--text-muted)]">Simple. Soft. Precise.</p>
+        </div>
+
+        <div class="soft-card overflow-hidden">
+            
+            <div class="flex p-2 gap-2">
+                <button onclick="switchTab('stopwatch')" id="tab-stopwatch" class="flex-1 py-3 rounded-xl text-sm transition-all duration-300 tab-active flex items-center justify-center gap-2">
+                    <i class="ph ph-stopwatch text-lg"></i> Stopwatch
+                </button>
+                <button onclick="switchTab('timer')" id="tab-timer" class="flex-1 py-3 rounded-xl text-sm transition-all duration-300 tab-inactive flex items-center justify-center gap-2">
+                    <i class="ph ph-timer text-lg"></i> Timer
+                </button>
+            </div>
+
+            <div class="p-6 md:p-8 min-h-[400px] flex flex-col justify-center relative">
+                
+                <div id="view-stopwatch" class="fade-in w-full text-center">
+                    
+                    <div class="font-mono-nums text-[var(--text-main)] mb-10 select-none">
+                        <div class="text-6xl md:text-7xl font-bold tracking-tight leading-none" id="sw-display-main">00:00</div>
+                        <div class="text-3xl md:text-4xl opacity-60 mt-2 flex justify-center items-end gap-1">
+                            <span id="sw-display-seconds">00</span>
+                            <span class="text-lg opacity-50 mb-1">.</span>
+                            <span class="text-xl" id="sw-display-ms">00</span>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center gap-4">
+                        <button onclick="resetStopwatch()" class="w-14 h-14 rounded-full btn-secondary flex items-center justify-center text-xl shadow-sm" title="Reset">
+                            <i class="ph ph-arrow-counter-clockwise"></i>
+                        </button>
+                        <button onclick="toggleStopwatch()" id="sw-btn-toggle" class="w-20 h-20 rounded-3xl btn-primary flex items-center justify-center text-3xl shadow-lg hover:shadow-xl">
+                            <i class="ph ph-play-fill" id="sw-icon-toggle"></i>
+                        </button>
+                        <button onclick="lapStopwatch()" class="w-14 h-14 rounded-full btn-secondary flex items-center justify-center text-xl shadow-sm" title="Lap">
+                            <i class="ph ph-flag"></i>
+                        </button>
+                    </div>
+
+                    <div class="mt-8 max-h-40 overflow-y-auto hide-scrollbar space-y-2 text-sm text-[var(--text-muted)]" id="sw-laps">
+                        </div>
+                </div>
+
+                <div id="view-timer" class="hidden fade-in w-full text-center">
+                    
+                    <div id="timer-setup" class="flex flex-col items-center">
+                        <div class="flex items-center gap-2 mb-8">
+                            <div class="flex flex-col items-center gap-1">
+                                <input type="number" id="input-h" placeholder="00" min="0" max="99" class="time-input w-20 h-24 text-4xl text-center rounded-2xl font-mono-nums font-bold">
+                                <label class="text-xs uppercase font-bold tracking-wider text-[var(--text-muted)]">Jam</label>
+                            </div>
+                            <span class="text-3xl font-bold text-[var(--text-muted)] pb-6">:</span>
+                            <div class="flex flex-col items-center gap-1">
+                                <input type="number" id="input-m" placeholder="00" min="0" max="59" class="time-input w-20 h-24 text-4xl text-center rounded-2xl font-mono-nums font-bold">
+                                <label class="text-xs uppercase font-bold tracking-wider text-[var(--text-muted)]">Mnt</label>
+                            </div>
+                            <span class="text-3xl font-bold text-[var(--text-muted)] pb-6">:</span>
+                            <div class="flex flex-col items-center gap-1">
+                                <input type="number" id="input-s" placeholder="00" min="0" max="59" class="time-input w-20 h-24 text-4xl text-center rounded-2xl font-mono-nums font-bold">
+                                <label class="text-xs uppercase font-bold tracking-wider text-[var(--text-muted)]">Dtk</label>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-2 mb-10 overflow-x-auto w-full justify-center hide-scrollbar px-2">
+                            <button onclick="setPreset(5,0)" class="px-4 py-2 rounded-lg bg-[var(--bg-color)] text-[var(--text-muted)] text-xs font-bold hover:text-[var(--primary)] transition-colors">5m</button>
+                            <button onclick="setPreset(10,0)" class="px-4 py-2 rounded-lg bg-[var(--bg-color)] text-[var(--text-muted)] text-xs font-bold hover:text-[var(--primary)] transition-colors">10m</button>
+                            <button onclick="setPreset(25,0)" class="px-4 py-2 rounded-lg bg-[var(--bg-color)] text-[var(--text-muted)] text-xs font-bold hover:text-[var(--primary)] transition-colors">25m</button>
+                        </div>
+                        
+                        <button onclick="startTimer()" class="w-full py-4 rounded-2xl btn-primary text-lg font-bold shadow-md flex items-center justify-center gap-2">
+                            <i class="ph ph-play"></i> Mulai Timer
+                        </button>
+                    </div>
+
+                    <div id="timer-running" class="hidden flex-col items-center">
+                        <div class="relative w-64 h-64 flex items-center justify-center mb-8">
+                            <svg class="w-full h-full transform -rotate-90">
+                                <circle cx="128" cy="128" r="120" stroke="var(--bg-color)" stroke-width="8" fill="transparent"/>
+                                <circle id="timer-progress" cx="128" cy="128" r="120" stroke="var(--primary)" stroke-width="8" fill="transparent" stroke-dasharray="753.6" stroke-dashoffset="0" stroke-linecap="round" class="transition-all duration-1000 linear"/>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center font-mono-nums text-[var(--text-main)]">
+                                <div class="text-5xl font-bold" id="tm-display">00:00:00</div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center gap-4 w-full px-4">
+                            <button onclick="resetTimer()" class="flex-1 py-3 rounded-xl btn-secondary font-bold">Batal</button>
+                            <button onclick="toggleTimerPause()" id="tm-btn-pause" class="flex-1 py-3 rounded-xl btn-primary font-bold">Jeda</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <audio id="alarm-sound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>

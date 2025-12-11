@@ -1,0 +1,137 @@
+/* --- CSS VARIABLES FOR THEMES --- */
+:root {
+    /* Default Theme (Matcha) */
+    --bg-color: #F0F7F4;
+    --card-bg: #FFFFFF;
+    --primary: #99D98C;
+    --primary-dark: #76C893;
+    --text-main: #2D3748;
+    --text-muted: #A0AEC0;
+    --shadow-color: rgba(153, 217, 140, 0.25);
+    --font-ui: 'Nunito', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Themes Data Attributes */
+[data-theme="berry"] {
+    --bg-color: #FFF0F3;
+    --card-bg: #FFFFFF;
+    --primary: #FFB3C1;
+    --primary-dark: #FF8FA3;
+    --shadow-color: rgba(255, 179, 193, 0.3);
+}
+
+[data-theme="ocean"] {
+    --bg-color: #E0F2F1;
+    --card-bg: #FFFFFF;
+    --primary: #80CBC4;
+    --primary-dark: #4DB6AC;
+    --shadow-color: rgba(128, 203, 196, 0.3);
+}
+
+[data-theme="sunset"] {
+    --bg-color: #FFF5EB;
+    --card-bg: #FFFFFF;
+    --primary: #FFB4A2;
+    --primary-dark: #E5989B;
+    --shadow-color: rgba(255, 180, 162, 0.3);
+}
+
+[data-theme="lavender"] {
+    --bg-color: #F3E8FF;
+    --card-bg: #FFFFFF;
+    --primary: #D8B4FE;
+    --primary-dark: #C084FC;
+    --shadow-color: rgba(216, 180, 254, 0.3);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-ui);
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Soft Card Styling */
+.soft-card {
+    background-color: var(--card-bg);
+    box-shadow: 0 10px 40px -10px var(--shadow-color), 0 0 20px -10px rgba(0,0,0,0.05);
+    border-radius: 2rem; /* Sangat rounded */
+    transition: all 0.3s ease;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+    transition: all 0.2s ease;
+}
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+.btn-secondary {
+    background-color: #EDF2F7;
+    color: #718096;
+}
+.btn-secondary:hover {
+    background-color: #E2E8F0;
+}
+
+/* Typography Helper */
+.font-mono-nums {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums; /* Penting agar angka tidak bergeser */
+}
+
+/* Custom Scrollbar hide */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Tab Animation */
+.tab-active {
+    color: var(--primary-dark);
+    background-color: var(--bg-color);
+    font-weight: 800;
+}
+.tab-inactive {
+    color: var(--text-muted);
+    background-color: transparent;
+}
+.tab-inactive:hover {
+    color: var(--primary);
+}
+
+/* Input styling for Timer */
+.time-input {
+    border: 2px solid transparent;
+    background: var(--bg-color);
+    color: var(--text-main);
+    transition: all 0.3s;
+}
+.time-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+}
+/* Hapus arrow pada input number */
+.time-input::-webkit-outer-spin-button,
+.time-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Animasi Transisi Halaman */
+.fade-in {
+    animation: fadeIn 0.4s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
