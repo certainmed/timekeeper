@@ -1,129 +1,143 @@
-Here is a comprehensive `README.md` file for your **Soft Chrono** project. It is structured to explain the features, the technology stack, and how the code works, making it perfect for a portfolio or GitHub repository.
-
-````markdown
 # Soft Chrono ⏱️
 
-**Soft Chrono** is a lightweight, aesthetically pleasing Stopwatch and Timer web application. Built with a focus on "Soft UI" design principles, it features smooth transitions, a calming color palette, and precise timekeeping capabilities without requiring a complex build process.
+![Project Status](https://img.shields.io/badge/status-active-success)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-![Project Status](https://img.shields.io/badge/status-active-success.svg)
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-
-## 🌟 Overview
-
-This project demonstrates how to build a fully functional, interactive web utility using a **Single File Component** approach. All HTML structure, CSS styling, and JavaScript logic are encapsulated within a single `.html` file, making it incredibly portable and easy to deploy.
+A dual-purpose time tracking web application featuring a precise **Stopwatch** and a visual **Countdown Timer**. Designed with a "Soft UI" aesthetic, it offers a calming user experience with smooth transitions, multiple color themes, and responsive interactivity.
 
 ## ✨ Features
 
-### 1. ⏱️ Stopwatch
-* **Precision Timing:** Tracks time down to the millisecond.
-* **Lap Functionality:** Record multiple laps without stopping the timer.
-* **Scrollable History:** View your lap history in a clean, scrollable list.
-* **Persistent Display:** dynamic formatting that adjusts based on the duration (switching focus between Minutes/Seconds and Hours/Minutes).
+### ⏱️ Stopwatch
+- **High Precision:** Tracks time down to 10 milliseconds.
+- **Lap Functionality:** Record unlimited split times/laps without stopping the clock.
+- **Smart Display:** Automatically adjusts format from `MM:SS.ms` to `HH:MM:SS.ms` for longer durations.
+- **Soft Controls:** Play, Pause, and Reset with smooth icon transitions.
 
-### 2. ⏳ Timer
-* **Visual Countdown:** A beautiful SVG-based circular progress bar that depletes as time runs out.
-* **Quick Presets:** One-click buttons for common durations (5m, 10m, 25m).
-* **Custom Input:** Set specific Hours, Minutes, and Seconds.
-* **Audio Alert:** Plays a sound when the timer reaches zero.
+### ⏳ Timer
+- **Custom Input:** Set hours, minutes, and seconds easily.
+- **Visual Feedback:** Circular progress ring that visually depletes as time runs out.
+- **Smart Controls:** Pause ("Jeda") and Resume ("Lanjut") functionality.
+- **Audio Alarm:** Plays a sound notification when the timer hits zero.
+- **Preset Buttons:** Quick-set functionality for common durations (1, 5, 10 minutes).
 
-### 3. 🎨 Dynamic Theming
-* **5 Color Palettes:** Switch instantly between *Matcha*, *Berry*, *Ocean*, *Sunset*, and *Lavender*.
-* **Persistence:** The app remembers your chosen theme using `localStorage`, so it stays the same when you refresh the page.
-* **Smooth Transitions:** CSS variables enable smooth color morphing when switching themes.
+### 🎨 Theming
+Personalize the look with 5 beautiful, pastel-inspired themes that persist via `localStorage`:
+- **Matcha** (Default Green)
+- **Berry** (Soft Pink)
+- **Ocean** (Calm Teal)
+- **Sunset** (Warm Orange)
+- **Lavender** (Light Purple)
 
-### 4. 📱 Responsive & Modern
-* **Mobile First:** optimized for both desktop and mobile screens.
-* **Glassmorphism:** subtle transparency and blur effects on floating elements.
-* **Soft UI (Neumorphism-inspired):** soft shadows and rounded corners for a tactile feel.
+## 🛠️ Technologies Used
 
----
+- **HTML5:** Semantic structure for the application.
+- **CSS3:**
+  - **CSS Variables:** For efficient theme switching.
+  - **Flexbox/Grid:** For responsive layout.
+  - **Animations:** Smooth fade-ins (`fade-in`) and transitions.
+  - **Soft UI:** Custom box-shadows for a neomorphic/soft-card look.
+- **JavaScript (ES6+):**
+  - `localStorage` for saving theme preferences.
+  - `setInterval` for precise time tracking.
+  - DOM manipulation for real-time UI updates.
+  - SVG manipulation for the timer progress ring.
+- **External Libraries:**
+  - **Phosphor Icons:** For clean, modern UI icons.
+  - **Google Fonts:** Uses *Nunito* for UI text and *JetBrains Mono* for numbers.
 
-## 🛠️ Tech Stack
+## 📂 Project Structure
 
-* **Core:** HTML5, Vanilla JavaScript (ES6+)
-* **Styling:** * **Tailwind CSS (via CDN):** For rapid utility-first styling and layout.
-    * **Custom CSS:** For complex animations, CSS Variables (Theming), and specific UI tweaks.
-* **Icons:** [Phosphor Icons](https://phosphoricons.com/) (Web/CDN).
-* **Fonts:** * *Nunito* (Google Fonts) for UI text.
-    * *JetBrains Mono* (Google Fonts) for tabular numbers to prevent jittering.
+```
+├── index.html   # Main application structure and layout
+├── style.css    # Styling, themes, and animations
+├── script.js    # Application logic (Timer, Stopwatch, Themes)
+└── README.md    # Project documentation
+```
 
----
+## 🚀 How to Run
 
-## 🚀 Getting Started
+1. **Clone or Download** this repository.
+2. Ensure all three files (`index.html`, `style.css`, `script.js`) are in the same folder.
+3. Open `index.html` in any modern web browser.
+4. **Enjoy!** Your theme preference will be saved automatically for your next visit.
 
-Since this is a single-file application, no installation or build steps (like `npm install`) are required.
+## 🕹️ Usage Guide
 
-### Prerequisites
-A modern web browser (Chrome, Firefox, Safari, Edge).
+### Switching Modes
+Use the top tabs to switch between **Stopwatch** and **Timer** views. The active tab is highlighted.
 
-### Installation
-1.  Download the `index.html` file.
-2.  Double-click to open it in your browser.
-3.  **That's it!** The app is ready to use.
+### Changing Themes
+Click on the colored theme buttons in the UI to instantly switch the color palette. This setting is saved in your browser.
 
----
+### Using the Stopwatch
+1. Click the **Play** icon to start.
+2. Click **Lap** (flag icon) to record a split time while running.
+3. Click **Pause** to stop the timer.
+4. Click **Reset** to clear all data and return to zero.
 
-## 📂 Code Structure Explained
+### Using the Timer
+1. Enter your desired duration using the input fields (Hours, Minutes, Seconds).
+2. Or use the quick preset buttons (1m, 5m, 10m).
+3. Click **Start**.
+4. The interface shifts to a countdown view with a circular progress indicator.
+5. Click **Jeda** (Pause) to pause, or **Lanjut** (Resume) to continue.
+6. When the timer reaches zero, an alarm sound plays automatically.
+7. Click **Reset** to return to the setup screen.
 
-The project is contained entirely in `index.html`. Here is how the code is organized:
+## 💡 Key Features Explained
 
-### 1. CSS Variables & Theming (`<style>`)
-We use CSS Root Variables to define the theme colors. When a user clicks a theme button, JavaScript updates the `data-theme` attribute on the `body`, which changes these variable values.
+### Theme System
+The app uses CSS custom properties (`--bg-color`, `--primary`, etc.) defined in `:root` and theme-specific overrides using `[data-theme]` selectors. JavaScript updates the `data-theme` attribute on the `<body>` element and persists the choice in `localStorage`.
 
+### Stopwatch Logic
+- Uses `Date.now()` for accurate time tracking independent of `setInterval` delays.
+- Updates display every 10ms for smooth millisecond counter.
+- Laps are stored in an array and rendered dynamically with reverse indexing.
+
+### Timer Logic
+- Calculates total time in milliseconds from user input.
+- Uses an SVG circle with `stroke-dashoffset` manipulation to create the visual progress ring.
+- Updates every 100ms (sufficient for countdown precision).
+- Plays an embedded audio element when countdown completes.
+
+### Responsive Design
+- Uses flexible units and percentage-based layouts.
+- Custom scrollbar hiding for cleaner look.
+- Tab navigation system with smooth transitions.
+
+## 🎨 Customization
+
+To add a new theme:
+
+1. Open `style.css`
+2. Add a new `[data-theme="your-theme-name"]` block with custom color variables
+3. Update the HTML to include a button that calls `setTheme('your-theme-name')`
+
+Example:
 ```css
-:root {
-    --primary: #99D98C; /* Default Matcha Color */
+[data-theme="mint"] {
+  --bg-color: #E8F8F5;
+  --card-bg: #FFFFFF;
+  --primary: #48C9B0;
+  --primary-dark: #17A589;
+  --shadow-color: rgba(72, 201, 176, 0.3);
 }
-[data-theme="berry"] {
-    --primary: #FFB3C1; /* Berry Color Override */
-}
-````
-
-### 2\. Application Logic (`<script>`)
-
-#### State Management
-
-Simple variables track the state of the stopwatch and timer.
-
-```javascript
-let swRunning = false; // Is stopwatch running?
-let tmRemaining = 0;   // Time remaining in milliseconds
 ```
 
-#### The Timer Loop
+## 📱 Browser Compatibility
 
-The timer uses `Date.now()` logic rather than simple `setInterval` counting to ensure accuracy even if the browser slows down.
+Works on all modern browsers that support:
+- CSS Variables
+- ES6 JavaScript
+- LocalStorage API
+- SVG manipulation
 
-```javascript
-// Calculates difference between End Time and Current Time
-tmRemaining = tmEndTime - Date.now();
-```
-
-#### SVG Animation
-
-The circular progress bar is animated by manipulating the `stroke-dashoffset` property of an SVG circle based on the percentage of time remaining.
-
-### 3\. Fonts Strategy
-
-We use **JetBrains Mono** specifically for the numbers (`.font-mono-nums`). This is a monospaced font, which ensures that the width of the time display doesn't jump around as the numbers change (e.g., a "1" taking up less space than a "0").
-
------
-
-## 🤝 Contributing
-
-Feel free to fork this project\! Ideas for improvements:
-
-1.  Add a "Dark Mode" specific theme.
-2.  Add keyboard shortcuts (Spacebar to Start/Stop).
-3.  Save the Timer presets in LocalStorage.
+Tested on: Chrome, Firefox, Safari, Edge (latest versions).
 
 ## 📄 License
 
-This project is open-source and available under the **MIT License**.
+This project is open source and available under the [MIT License](LICENSE).
 
------
+---
 
-*Created with ❤️ by [Erick]*
-
-```
-```
+**Created with ❤️ using Vanilla JavaScript, CSS3, and HTML5**
